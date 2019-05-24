@@ -1,0 +1,61 @@
+input[type='checkbox'].accurat {
+  cursor: pointer;
+  margin: 0 0.35em 0.25em -1.6em;
+  vertical-align: middle;
+}
+
+input[type='checkbox'].buoldo {
+  cursor: pointer;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+span.accurat.octicon {
+  margin-right: 4px;
+}
+
+.gwfp-issue-description,
+.gwfp-pr-link {
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  .gwfp-issue-description-header,
+  .gwfp-pr-link-header {
+    padding: 10px 40px;
+    background: #f2f8fa;
+    color: #777;
+    font-weight: bold;
+    cursor: pointer;
+    &:hover {
+      background: #f0f5fa;
+      color: #444;
+    }
+  }
+  .gwfp-issue-description-arrow-down,
+  .gwfp-issue-description-arrow-up {
+    margin-left: 20px;
+    float: right;
+    display: inline;
+  }
+  .gwfp-issue-description-arrow-up {
+    display: none;
+  }
+  .gwfp-issue-description-content {
+    padding: 40px;
+    display: none;
+    img {
+      max-width: 100%;
+    }
+  }
+  &.visible {
+    .gwfp-issue-description-content {
+      display: block;
+    }
+    .gwfp-issue-description-arrow-up {
+      display: inline;
+    }
+    .gwfp-issue-description-arrow-down {
+      display: none;
+    }
+  }
+}

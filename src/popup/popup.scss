@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+}
+
+#form {
+  min-width: 500px;
+
+  label {
+    display: block;
+    font-weight: 600;
+  }
+
+  input {
+    display: block;
+    width: 100%;
+    border: 1px solid #EAEAEA;
+    border-radius: 3px;
+    padding: 5px 8px;
+    margin-top: 5px;
+  }
+
+  #button-save {
+    display: block;
+    margin-top: 20px;
+    padding: 7px 10px;
+  }
+}

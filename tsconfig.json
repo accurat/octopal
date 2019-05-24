@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "outDir": "./build/",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "sourceMap": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "pretty": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "es2015",
+    "target": "es5",
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true
+  }
+}
