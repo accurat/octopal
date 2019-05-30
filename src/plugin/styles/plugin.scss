@@ -4,12 +4,6 @@ input[type='checkbox'].accurat {
   vertical-align: middle;
 }
 
-input[type='checkbox'].buoldo {
-  cursor: pointer;
-  margin-right: 4px;
-  vertical-align: middle;
-}
-
 span.accurat.octicon {
   margin-right: 4px;
 }
@@ -43,6 +37,23 @@ span.accurat.octicon {
   .gwfp-issue-description-content {
     padding: 40px;
     display: none;
+    .subissue {
+      margin-bottom: 20px;
+      .open {
+        text-transform: uppercase;
+        font-weight: 700;
+        padding: 5px;
+        background: #90f42c;
+        border-radius: 5px;
+      }
+      .closed {
+        text-transform: uppercase;
+        font-weight: 700;
+        padding: 5px;
+        background: #d93f0b;
+        border-radius: 5px;
+      }
+    }
     img {
       max-width: 100%;
     }

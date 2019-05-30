@@ -1,7 +1,7 @@
 import * as $ from 'jquery'
 import * as querystring from 'query-string'
 
-export default function addSubIssueButton({ owner, repo }: { owner: string; repo: string }) {
+export default function addRelatedIssueButton({ owner, repo }: { owner: string; repo: string }) {
   const newIssueURL = `/${owner}/${repo}/issues/new`
   const parentIssueTitle = $('span.js-issue-title').text()
   const [, topic = undefined] = parentIssueTitle.match(/\[(.+)\]/) || []
@@ -15,7 +15,7 @@ export default function addSubIssueButton({ owner, repo }: { owner: string; repo
         style="margin-top: 2px; width: 100%; text-align: center;"
       >
         <span class="octicon octicon-tasklist"></span>
-        New sub-issue
+        New related issue
       </a>
     </div>
   `)

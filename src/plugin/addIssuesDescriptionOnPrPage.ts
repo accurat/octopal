@@ -1,38 +1,38 @@
 import * as $ from 'jquery'
 import * as marked from 'marked'
+import { Issue } from './types'
 
-$(document).on('click', '.gwfp-issue-description-header', () => {
-  $('.gwfp-issue-description').toggleClass('visible')
-})
+// $(document).on('click', '.gwfp-issue-description-header', () => {
+//   $('.gwfp-issue-description').toggleClass('visible')
+// })
 
 const appendIssueDescriptionBox = ({
-  associatedIssueNumber,
+  issueNumber,
   owner,
   repo,
 }: {
-  associatedIssueNumber: string
+  issueNumber: string
   owner: string
   repo: string
 }) => {
   const issueDescriptionBox = $(`
-    <div class='gwfp-issue-description issue-${associatedIssueNumber}'>
-      <div class='gwfp-issue-description-header'>
-        ISSUE DESCRIPTION <a href="/${owner}/${repo}/issues/${associatedIssueNumber}">#${associatedIssueNumber}</a>
+    <div class='gwfp-issue-description issue-${issueNumber}'>
+      <div class='gwfp-issue-description-header issue-${issueNumber}'>
+        ISSUE DESCRIPTION <a href="/${owner}/${repo}/issues/${issueNumber}">#${issueNumber}</a>
         <span class='gwfp-issue-description-arrow-down'>▼</span>
         <span class='gwfp-issue-description-arrow-up'>▲</span>
       </div>
-      <div class='gwfp-issue-description-content issue-${associatedIssueNumber} markdown-body markdown-format'>
+      <div class='gwfp-issue-description-content issue-${issueNumber} markdown-body markdown-format'>
         -
       </div>
     </div>
   `)
-  $(`.gwfp-issue-description.issue-${associatedIssueNumber}`).remove()
+  $(`.gwfp-issue-description.issue-${issueNumber}`).remove()
   $('#discussion_bucket').prepend(issueDescriptionBox)
-}
-
-interface Issue {
-  body: string
-  number: number
+  const open = () => {
+    $(`.gwfp-issue-description.issue-${issueNumber}`).toggleClass('visible')
+  }
+  $(`.gwfp-issue-description.issue-${issueNumber}`).on('click', {}, open)
 }
 
 const appendIssueDescription = (issue: Issue) => {
@@ -45,16 +45,16 @@ export default function({ owner, repo }: { owner: string; repo: string }) {
     const apiBaseUrl = 'https://api.github.com/'
     const issues = $('.comment-body .issue-link')
     Array.from(issues).forEach((issue: HTMLElement) => {
-      const associatedIssueNumber = issue.innerHTML.slice(1)
+      const issueNumber = issue.innerHTML.slice(1)
       const apiToken = githubToken as string | undefined
-      if (apiToken && associatedIssueNumber) {
+      if (apiToken && issueNumber) {
         appendIssueDescriptionBox({
-          associatedIssueNumber,
+          issueNumber,
           owner,
           repo,
         })
         $.get(
-          `${apiBaseUrl}repos/${owner}/${repo}/issues/${associatedIssueNumber}?access_token=${apiToken}`,
+          `${apiBaseUrl}repos/${owner}/${repo}/issues/${issueNumber}?access_token=${apiToken}`,
           appendIssueDescription,
         )
       }
