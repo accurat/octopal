@@ -8,10 +8,10 @@ export default function addRelatedIssueButton({ owner, repo }: { owner: string; 
 
   const sideBar = $('#partial-discussion-sidebar')
 
-  const newSubIssueButton = $(`
+  const newRelatedIssueButton = $(`
     <div class="discussion-sidebar-item" style="padding-top: 0;">
       <a
-        class="btn btn-sm accurat-new-sub-issue-button"
+        class="btn btn-sm accurat-new-related-issue-button"
         style="margin-top: 2px; width: 100%; text-align: center;"
       >
         <span class="octicon octicon-tasklist"></span>
@@ -25,53 +25,48 @@ export default function addRelatedIssueButton({ owner, repo }: { owner: string; 
       class="reason text-small text-muted accurat-need-topic-message"
       style="margin-top: 6px;"
     >
-      You need to add a topic to the issue title to add a sub-issue
-      (then please reload the page)
+      You need to add a [topic] to the issue title (text surrounded by square brackets) in order to add a related issue
+      (then refresh the page)
     </div>
   `)
 
   // CLEAN
-  $('.accurat-new-sub-issue-button')
+  $('.accurat-new-related-issue-button')
     .parent()
     .remove()
-  $('.accurat-new-sub-issue-button').remove()
+  $('.accurat-new-related-issue-button').remove()
   $('.accurat-need-topic-message').remove()
 
-  sideBar.prepend(newSubIssueButton)
+  sideBar.prepend(newRelatedIssueButton)
 
   if (!topic) {
-    newSubIssueButton
+    newRelatedIssueButton
       .children()
       .first()
       .addClass('disabled')
       .prop('disabled', true)
-    needTopicMessage.insertAfter($('.accurat-new-sub-issue-button'))
+    needTopicMessage.insertAfter($('.accurat-new-related-issue-button'))
   }
 
-  $('.accurat-new-sub-issue-button').on('click', () => {
-    if ($('.accurat-new-sub-issue-button').hasClass('disabled')) {
+  $('.accurat-new-related-issue-button').on('click', () => {
+    if ($('.accurat-new-related-issue-button').hasClass('disabled')) {
       return
     }
     const milestone = $('.milestone-name').prop('title')
-    const parentIssueNumber = $('.gh-header-number')
-      .text()
-      .replace('#', '')
+    const parentIssueNumber = $('.gh-header-number').html()
+    console.log(parentIssueNumber)
     const labels = $('.labels > .IssueLabel > span')
       .toArray()
       .map(x => x.innerHTML)
-      .filter(x => x !== 'macro')
+      .join()
 
     const query = {
       milestone,
       labels,
-      parentIssueNumber,
-      topic,
-      project: repo,
-      t: 'subIssue',
+      body: `< ${parentIssueNumber}`,
+      title: `[${topic}] <issue_title>`,
     }
-    const url = `https://nemobot.our.buildo.io/templates?${querystring.stringify(query)}` // this is temporary
-    $.get(url, res => {
-      window.location.href = `${newIssueURL}?${res.subIssue.computedQuery}`
-    })
+
+    window.open(`${newIssueURL}?${querystring.stringify(query)}`)
   })
 }
