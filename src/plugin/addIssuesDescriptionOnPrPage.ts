@@ -19,8 +19,8 @@ const appendIssueDescriptionBox = ({
     <div class='gwfp-issue-description issue-${issueNumber}'>
       <div class='gwfp-issue-description-header issue-${issueNumber}'>
         ISSUE DESCRIPTION <a href="/${owner}/${repo}/issues/${issueNumber}">#${issueNumber}</a>
-        <span class='gwfp-issue-description-arrow-down'>▼</span>
-        <span class='gwfp-issue-description-arrow-up'>▲</span>
+        <span class='gwfp-issue-description-arrow-down'>↓</span>
+        <span class='gwfp-issue-description-arrow-up'>↑</span>
       </div>
       <div class='gwfp-issue-description-content issue-${issueNumber} markdown-body markdown-format'>
         -
@@ -28,7 +28,7 @@ const appendIssueDescriptionBox = ({
     </div>
   `)
   $(`.gwfp-issue-description.issue-${issueNumber}`).remove()
-  $('#discussion_bucket').prepend(issueDescriptionBox)
+  $(issueDescriptionBox).insertBefore('#discussion_bucket')
   const open = () => {
     $(`.gwfp-issue-description.issue-${issueNumber}`).toggleClass('visible')
   }

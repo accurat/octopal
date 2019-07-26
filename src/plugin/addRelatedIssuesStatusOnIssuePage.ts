@@ -11,15 +11,15 @@ const appendSubIssuesDescriptionBox = (issuesLength: number) => {
     <div class='issue-page gwfp-issue-description'>
       <div class='issue-page gwfp-issue-description-header'>
         RELATED ISSUES  |  ${issuesLength}
-        <span class='gwfp-issue-description-arrow-down'>▼</span>
-        <span class='gwfp-issue-description-arrow-up'>▲</span>
+        <span class='gwfp-issue-description-arrow-down'>↓</span>
+        <span class='gwfp-issue-description-arrow-up'>↑</span>
       </div>
       <div class='gwfp-issue-description-content markdown-body markdown-format'>
       </div>
     </div>
   `)
   $('.gwfp-issue-description').remove()
-  $('#discussion_bucket').prepend(issueDescriptionBox)
+  $(issueDescriptionBox).insertBefore('#discussion_bucket')
 }
 
 const appendIssueDescription = ({ owner, repo }: { owner: string; repo: string }) => (
@@ -31,7 +31,7 @@ const appendIssueDescription = ({ owner, repo }: { owner: string; repo: string }
     <div class="subissue"> 
       <div>
       ${issue.title} - ${issueLink} 
-      <span class="${issue.state}">${issue.state}</span>
+      <span class="button ${issue.state}">${issue.state}</span>
       </div>
     </div>`
 
