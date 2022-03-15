@@ -7,7 +7,7 @@
     "date.js": "^0.3.3",
     "dotenv": "^8.0.0",
     "jquery": "^3.3.1",
-    "lodash-es": "^4.17.11",
+    "lodash-es": "^4.17.21",
     "marked": "^0.6.1",
     "query-string": "^6.2.0"
   },
